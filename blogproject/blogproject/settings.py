@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mieblog'
+    # 'mieblog',
+    'mieblog.apps.MieblogConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'blogproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,4 +119,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# django会从注册应用下自动查找static下的静态文件
 STATIC_URL = '/static/'
+# STATICFILES_DIES仅用于非app下的静态文件，此处用不到
+# STATICFILES_DIES = [
+#     os.path.join(BASE_DIR, 'static','/aa/'),
+# ]
