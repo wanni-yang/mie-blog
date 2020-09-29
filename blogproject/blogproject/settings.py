@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'mieblog',
     'mieblog.apps.MieblogConfig',
+    'comment.apps.CommentConfig',
 ]
 
 MIDDLEWARE = [
