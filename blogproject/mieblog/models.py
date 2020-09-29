@@ -1,7 +1,10 @@
+import markdown
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import strip_tags
 
 class Category(models.Model):
     """
@@ -65,6 +68,15 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         self.modified_time = timezone.now()
+
+        # 自动生成摘要
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+        ])
+
+        self.excerpt = strip_tags(md.convert(self.body))[:54]
+
         # 调用父类的 save 以执行数据保存回数据库的逻辑
         super().save(*args, **kwargs)
 
